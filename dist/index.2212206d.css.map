@@ -1,0 +1,1 @@
+{"mappings":"AACA;;;;AACA","sources":["src/index.scss"],"sourcesContent":["$color: steelblue;\r\n.watchlist{color: $color}\r\nhtml, body {\r\n  background-color: #3b3b3b;\r\n  color: lightgray;\r\n  font-family: Arial, sans-serif;\r\n}\r\n"],"names":[],"version":3,"file":"index.2212206d.css.map","sourceRoot":"/__parcel_source_root/"}
