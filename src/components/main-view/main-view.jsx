@@ -1,18 +1,25 @@
-// import { SignupView } from "../signup-view/signup-view";
-// import { LoginView } from "../login-view/login-view";
-// import { ProfileView } from "../profile-view/profile-view";
+import { useState, useEffect } from "react";
 import { MovieView } from "../movie-view/movie-view";
 import { MovieCard } from "../movie-card/movie-card";
-import { useState, useEffect } from "react";
+import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
+// import { ProfileView } from "../profile-view/profile-view";
 
 export const MainView =()=>{
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
+  const [user, setUser] = useState(storedUser? storedUser : null);
+  const [token, setToken] = useState(storedToken? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [selMovie, setSelMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const apiUrl = "https://watchlist-api-e692810fd7a5.herokuapp.com/movies";
+  const apiUrl = "https://watchlist-api-e692810fd7a5.herokuapp.com";
 
   useEffect(()=>{
-    fetch(apiUrl)
+    if (!token) return;
+    fetch(apiUrl+"/movies", {
+      headers: { Authorization: `Bearer ${token}` }
+    })
     .then(res=>res.json())
     .then(data=>{
         console.log(data)
@@ -28,11 +35,32 @@ export const MainView =()=>{
         }));
         setMovies(moviesFromApi);
         setIsLoading(false);
-  });
-    return ()=>{};
-  },[]);
+    });
+  },[token]); //dependency array ensures fetch is called every time token changes 
 
-  return selMovie ? <MovieView
+  if (!user) return(
+    <>
+      Login:
+      <LoginView
+        onLoggedIn={ (user, token) =>{
+          setUser(user);
+          setToken(token);
+        } }
+        url={ apiUrl }
+        />
+      <br />
+      or
+      <br />
+      <br />
+      Signup:
+      <SignupView
+        url={ apiUrl }
+      />
+    </>
+  );
+
+  let content = isLoading ? <div>Loading...</div> :
+    selMovie ? <MovieView
       movie={ selMovie }
       onBackClick={ ()=> setSelMovie(null) }/> :
     movies.length <1 ? <div>No movies in list.</div> :
@@ -42,4 +70,15 @@ export const MainView =()=>{
         movie={ m }
         onMovieClick={ newMovieSel => setSelMovie(newMovieSel) }
     />)}</div>;
+
+    return <>
+        { content }
+        <button
+          onClick={ ()=>{
+            setUser(null);
+            setToken(null);
+            localStorage.clear();
+          } }
+        >Logout</button>
+      </>
 };

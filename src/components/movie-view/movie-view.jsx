@@ -16,7 +16,7 @@ MovieView.propTypes={
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     genre: PropTypes.object,
-    director: PropTypes.string,
+    director: PropTypes.object,
     actors: PropTypes.array,
     featured: PropTypes.bool.isRequired,
   }).isRequired,
