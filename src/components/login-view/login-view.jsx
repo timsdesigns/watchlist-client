@@ -18,7 +18,7 @@ export const LoginView =({ onLoggedIn, url })=>{
       body: JSON.stringify(data)
     }).then(res=>res.json())
     .then(data=>{
-      console.log("Login response: ", data);
+      //console.log("Login response: ", data); // test login data
       if (data.user){
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", JSON.stringify(data.token));
