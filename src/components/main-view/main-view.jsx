@@ -5,6 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 // import { ProfileView } from "../profile-view/profile-view";
 import { API_BASE_URL } from "../../config/config";
+import { Col, Row, Button } from "react-bootstrap";
 
 export const MainView =()=>{
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -40,46 +41,53 @@ export const MainView =()=>{
   },[token]); //dependency array ensures fetch is called every time token changes 
 
   if (!user) return(
-    <>
-      Login:
-      <LoginView
-        onLoggedIn={ (user, token) =>{
-          setUser(user);
-          setToken(token);
-        } }
-        url={ apiUrl }
-        />
-      <br />
+    <Row>
+      <Col>
+        <LoginView
+          onLoggedIn={ (user, token) =>{
+            setUser(user);
+            setToken(token);
+            } }
+            url={ apiUrl }
+          />
+      </Col>
       or
-      <br />
-      <br />
-      Signup:
-      <SignupView
-        url={ apiUrl }
-      />
-    </>
+      <Col>
+        <SignupView
+          url={ apiUrl }
+          />
+      </Col>
+    </Row>
   );
 
-  let content = isLoading ? <div>Loading...</div> :
-    selMovie ? <MovieView
-      movie={ selMovie }
-      onBackClick={ ()=> setSelMovie(null) }/> :
-    movies.length <1 ? <div>No movies in list.</div> :
-    <div>{ movies.map( m =>
-      <MovieCard
-        key={ m.id }
-        movie={ m }
-        onMovieClick={ newMovieSel => setSelMovie(newMovieSel) }
-    />)}</div>;
+  let content = isLoading ? <Col>Loading...</Col> :
+    selMovie ? <Col>
+      <MovieView
+        movie={ selMovie }
+        onBackClick={ ()=> setSelMovie(null) }/>
+    </Col> :
+    movies.length <1 ? <Col>No movies in list.</Col> :
+    <>{ movies.map( m =>
+      <Col>
+        <MovieCard
+          key={ m.id }
+          movie={ m }
+          onMovieClick={ newMovieSel => setSelMovie(newMovieSel) }
+          />
+      </Col>
+    )}</>;
 
-    return <>
+    return <Row>
         { content }
-        <button
-          onClick={ ()=>{
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-          } }
-        >Logout</button>
-      </>
+        <Col>
+          <Button
+            variant="primary"
+            onClick={ ()=>{
+              setUser(null);
+              setToken(null);
+              localStorage.clear();
+              } }
+              >Logout</Button>
+        </Col>
+      </Row>
 };
