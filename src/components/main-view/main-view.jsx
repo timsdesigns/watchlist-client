@@ -5,7 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 // import { ProfileView } from "../profile-view/profile-view";
 import { API_BASE_URL } from "../../config/config";
-import { Col, Row, Button } from "react-bootstrap";
+import { Col, Row, Button, CardGroup, Card } from "react-bootstrap";
 
 export const MainView =()=>{
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -41,23 +41,41 @@ export const MainView =()=>{
   },[token]); //dependency array ensures fetch is called every time token changes 
 
   if (!user) return(
+    <>
     <Row>
       <Col>
-        <LoginView
-          onLoggedIn={ (user, token) =>{
-            setUser(user);
-            setToken(token);
-            } }
-            url={ apiUrl }
-          />
-      </Col>
-      or
-      <Col>
-        <SignupView
-          url={ apiUrl }
-          />
+        <CardGroup>
+          <Card>
+          <Card.Body>
+            <Card.Title>Please Login:</Card.Title>
+            <LoginView
+              onLoggedIn={ (user, token) =>{
+                setUser(user);
+                setToken(token);
+                } }
+                url={ apiUrl }
+                />
+          </Card.Body>
+          </Card>
+        </CardGroup>
       </Col>
     </Row>
+    or
+    <Row>
+      <Col>
+        <CardGroup>
+          <Card>
+          <Card.Body>
+            <Card.Title>Please Register:</Card.Title>
+            <SignupView
+              url={ apiUrl }
+              />
+          </Card.Body>
+          </Card>
+        </CardGroup>
+      </Col>
+    </Row>
+    </>
   );
 
   let content = isLoading ? <Col>Loading...</Col> :

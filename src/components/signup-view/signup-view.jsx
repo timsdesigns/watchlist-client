@@ -42,6 +42,7 @@ export const SignupView =({ url })=>{
             autoComplete="on"
             pattern="[a-zA-Z0-9]+"
             title="Username can only contain alphanumeric characters."
+            placeholder="Enter at least 5 characters."
             />
       </Form.Group>
       <Form.Group controlId="formPassword">
@@ -53,6 +54,7 @@ export const SignupView =({ url })=>{
             required
             minLength="10"
             autoComplete="on"
+            placeholder="Enter at least 10 characters."
           />
       </Form.Group>
       <Form.Group controlId="formEmail">
@@ -62,6 +64,7 @@ export const SignupView =({ url })=>{
             value={ email }
             onChange={ e => setEmail(e.target.value) }
             required
+            placeholder="example@email.com"
             />
       </Form.Group>
       <Form.Group controlId="formBirthday">
@@ -71,6 +74,7 @@ export const SignupView =({ url })=>{
           value={ birthday }
           onChange={ e => setBirthday(e.target.value) }
           required
+          placeholder="1990/12/06"
           />
       </Form.Group>
       <Button variant="primary" type="submit">Submit</Button>
