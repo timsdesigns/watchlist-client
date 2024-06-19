@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 
 export const LoginView =({ onLoggedIn, url })=>{
   const [username, setUsername] = useState("");
@@ -28,26 +29,32 @@ export const LoginView =({ onLoggedIn, url })=>{
   };
 
   return (
-    <form onSubmit={ handleSubmit }>
-      <label>Username:<input
-        type="text"
-        value={ username }
-        onChange={ e => setUsername(e.target.value) }
-        required
-        minLength="5"
-        autoComplete="on"
-        pattern="[a-zA-Z0-9]+"
-        title="Username can only contain alphanumeric characters."
-      /></label>
-      <label>Password:<input
-        type="password"
-        value={ password }
-        onChange={ e => setPassword(e.target.value) }
-        required
-        minLength="10"
-        autoComplete="on"
-      /></label>
-      <button type="submit">Submit</button>
-    </form>
+    <Form onSubmit={ handleSubmit }>
+      <Form.Group>
+        <Form.Label>Username:</Form.Label>
+          <Form.Control
+          type="text"
+          value={ username }
+          onChange={ e => setUsername(e.target.value) }
+          required
+          minLength="5"
+          autoComplete="on"
+          pattern="[a-zA-Z0-9]+"
+          title="Username can only contain alphanumeric characters."
+          />
+      </Form.Group>
+      <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+          type="password"
+          value={ password }
+          onChange={ e => setPassword(e.target.value) }
+          required
+          minLength="10"
+          autoComplete="on"
+          />
+        <Button variant="primary" type="submit">Submit</Button>
+      </Form.Group>
+    </Form>
   );
 };
