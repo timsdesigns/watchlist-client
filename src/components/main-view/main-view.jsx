@@ -4,6 +4,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 // import { ProfileView } from "../profile-view/profile-view";
+import { API_BASE_URL } from "../../config/config";
 
 export const MainView =()=>{
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -13,7 +14,7 @@ export const MainView =()=>{
   const [movies, setMovies] = useState([]);
   const [selMovie, setSelMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const apiUrl = "https://watchlist-api-e692810fd7a5.herokuapp.com";
+  const apiUrl = API_BASE_URL; //"https://watchlist-api-e692810fd7a5.herokuapp.com";  // consume from ../../config/config.js
 
   useEffect(()=>{
     if (!token) return;
@@ -22,7 +23,7 @@ export const MainView =()=>{
     })
     .then(res=>res.json())
     .then(data=>{
-        console.log(data)
+        //console.log(data); // check out object structure
         const moviesFromApi = data.map(m=>({
             id: m._id,
             title: m.Title,
