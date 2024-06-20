@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 const WatchlistApp = ()=>
   // <div className="watchlist"><div>Good morning</div></div>;
   // <MainView />;
-  <Container fluid data-bs-theme="dark">
+  <Container data-bs-theme="dark">
     <MainView />
   </Container>;
 

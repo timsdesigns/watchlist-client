@@ -86,7 +86,7 @@ export const MainView =()=>{
     </Col> :
     movies.length <1 ? <Col>No movies in list.</Col> :
     <>{ movies.map( m =>
-      <Col>
+      <Col className="mb5" md="3">
         <MovieCard
           key={ m.id }
           movie={ m }
@@ -95,7 +95,7 @@ export const MainView =()=>{
       </Col>
     )}</>;
 
-    return <Row>
+    return <Row xs={1} md={2} lg={4} className="g-4">
         { content }
         <Col>
           <Button
