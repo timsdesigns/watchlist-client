@@ -27266,13 +27266,16 @@ const MainView = ()=>{
     const [isLoading, setIsLoading] = (0, _react.useState)(true);
     const apiUrl = (0, _config.API_BASE_URL); //"https://watchlist-api-e692810fd7a5.herokuapp.com";  // consume from ../../config/config.js
     (0, _react.useEffect)(()=>{
-        if (!token) return;
+        if (!token) {
+            console.log("no token found");
+            return;
+        }
         fetch(apiUrl + "/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((res)=>res.json()).then((data)=>{
-            //console.log(data); // check out object structure
+            console.log(data); // check out object structure
             const moviesFromApi = data.map((m)=>({
                     id: m._id,
                     title: m.Title,
@@ -27289,7 +27292,7 @@ const MainView = ()=>{
                 }));
             setMovies(moviesFromApi);
             setIsLoading(false);
-        });
+        }).catch((error)=>console.error("Fetch error:", error));
     }, [
         token
     ]); //dependency array ensures fetch is called every time token changes 
@@ -27305,7 +27308,7 @@ const MainView = ()=>{
                                         children: "Please Login:"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 50,
+                                        lineNumber: 54,
                                         columnNumber: 13
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
@@ -27316,33 +27319,33 @@ const MainView = ()=>{
                                         url: apiUrl
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 51,
+                                        lineNumber: 55,
                                         columnNumber: 13
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 49,
+                                lineNumber: 53,
                                 columnNumber: 11
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 48,
+                            lineNumber: 52,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 47,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 46,
+                    lineNumber: 50,
                     columnNumber: 7
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 45,
+                lineNumber: 49,
                 columnNumber: 5
             }, undefined),
             "or",
@@ -27356,40 +27359,40 @@ const MainView = ()=>{
                                         children: "Please Register:"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 69,
+                                        lineNumber: 73,
                                         columnNumber: 13
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {
                                         url: apiUrl
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 70,
+                                        lineNumber: 74,
                                         columnNumber: 13
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 68,
+                                lineNumber: 72,
                                 columnNumber: 11
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 67,
+                            lineNumber: 71,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 66,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 65,
+                    lineNumber: 69,
                     columnNumber: 7
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 64,
+                lineNumber: 68,
                 columnNumber: 5
             }, undefined)
         ]
@@ -27398,7 +27401,7 @@ const MainView = ()=>{
         children: "Loading..."
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 81,
+        lineNumber: 85,
         columnNumber: 29
     }, undefined) : selMovie ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
@@ -27406,18 +27409,18 @@ const MainView = ()=>{
             onBackClick: ()=>setSelMovie(null)
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 83,
+            lineNumber: 87,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 82,
+        lineNumber: 86,
         columnNumber: 16
     }, undefined) : movies.length < 1 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
         children: "No movies in list."
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 87,
+        lineNumber: 91,
         columnNumber: 24
     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: movies.map((m)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -27428,12 +27431,12 @@ const MainView = ()=>{
                     onMovieClick: (newMovieSel)=>setSelMovie(newMovieSel)
                 }, m.id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 90,
+                    lineNumber: 94,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 89,
+                lineNumber: 93,
                 columnNumber: 7
             }, undefined))
     }, void 0, false);
@@ -27455,18 +27458,18 @@ const MainView = ()=>{
                     children: "Logout"
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 101,
+                    lineNumber: 105,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 100,
+                lineNumber: 104,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 98,
+        lineNumber: 102,
         columnNumber: 12
     }, undefined);
 };
@@ -28554,13 +28557,18 @@ const MovieCard = ({ movie, onMovieClick })=>{
         className: "h-100 vh-5 w-100 hover-overlay",
         variant: "link",
         onClick: ()=>onMovieClick(movie),
+        style: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end"
+        },
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
                 variant: "top",
                 src: movie.image
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 38,
+                lineNumber: 39,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -28569,7 +28577,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 40,
+                        lineNumber: 41,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
@@ -28584,7 +28592,13 @@ const MovieCard = ({ movie, onMovieClick })=>{
                         lineNumber: 42,
                         columnNumber: 9
                     }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Title, {
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
+                        style: {
+                            textAlign: "right",
+                            position: "absolute",
+                            bottom: 5,
+                            right: 20
+                        },
                         children: movie.genre.name
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
@@ -28594,7 +28608,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 39,
+                lineNumber: 40,
                 columnNumber: 7
             }, undefined)
         ]
@@ -31035,7 +31049,7 @@ const LoginView = ({ onLoggedIn, url })=>{
             //console.log("Login response: ", data); // test login data
             if (data.user) {
                 localStorage.setItem("user", JSON.stringify(data.user));
-                localStorage.setItem("token", JSON.stringify(data.token));
+                localStorage.setItem("token", data.token); // don't stringify!
                 onLoggedIn(data.user, data.token);
             } else alert("User not found.");
         }).catch((e)=>alert("Problem with login."));

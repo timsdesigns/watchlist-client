@@ -34,19 +34,19 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       className="h-100 vh-5 w-100 hover-overlay"
       variant="link"
       onClick={() => onMovieClick(movie)}
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}
     >
       <Card.Img variant="top" src={ movie.image } />
-      <Card.Body>
+      <Card.Body >
         <Card.Title>{ movie.title }</Card.Title>
-        {/* <Card.Text>{movie.description}</Card.Text> */}
         <Card.Text
             className="card-text"
             style={{ maxHeight: '50px', overflow: 'hidden' }}>
           { isTruncated ? truncatedDescription : movie.description }
         </Card.Text>
-        <Card.Title>
+        <Card.Text style={{ textAlign: 'right', position: 'absolute', bottom: 5, right: 20 }}>
           { movie.genre.name }
-        </Card.Title>
+        </Card.Text>
       </Card.Body>
     </Card>
   );

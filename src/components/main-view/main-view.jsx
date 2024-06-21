@@ -18,13 +18,16 @@ export const MainView =()=>{
   const apiUrl = API_BASE_URL; //"https://watchlist-api-e692810fd7a5.herokuapp.com";  // consume from ../../config/config.js
 
   useEffect(()=>{
-    if (!token) return;
+    if (!token) {
+      console.log("no token found");
+      return;      
+    }
     fetch(apiUrl+"/movies", {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res=>res.json())
     .then(data=>{
-        //console.log(data); // check out object structure
+        console.log(data); // check out object structure
         const moviesFromApi = data.map(m=>({
             id: m._id,
             title: m.Title,
@@ -37,7 +40,8 @@ export const MainView =()=>{
         }));
         setMovies(moviesFromApi);
         setIsLoading(false);
-    });
+    })
+    .catch(error => console.error('Fetch error:', error));
   },[token]); //dependency array ensures fetch is called every time token changes 
 
   if (!user) return(
