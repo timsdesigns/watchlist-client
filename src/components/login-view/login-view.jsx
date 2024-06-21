@@ -22,7 +22,7 @@ export const LoginView =({ onLoggedIn, url })=>{
       //console.log("Login response: ", data); // test login data
       if (data.user){
         localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", JSON.stringify(data.token));
+        localStorage.setItem("token", data.token); // don't stringify!
         onLoggedIn(data.user, data.token);
       } else alert("User not found.");
     }).catch(e=>alert("Problem with login."))
