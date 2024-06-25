@@ -90,7 +90,9 @@ export const MainView =()=>{
     </Col> :
     movies.length <1 ? <Col>No movies in list.</Col> :
     <>{ movies.map( m =>
-        <Col className="mb5" md="3">
+        <Col
+          className="mb5"
+          md="3">
           <MovieCard
             key={ m.id }
             movie={ m }
@@ -113,9 +115,9 @@ export const MainView =()=>{
           <Button
             variant="primary"
             onClick={ ()=>{
-              setUser(null);
-              setToken(null);
-              localStorage.clear();
+                setUser(null);
+                setToken(null);
+                localStorage.clear();
               } }
               >Logout</Button>
         </Col>

@@ -27432,7 +27432,7 @@ const MainView = ()=>{
                     onMovieClick: (newMovieSel)=>setSelMovie(newMovieSel)
                 }, m.id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 94,
+                    lineNumber: 96,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
@@ -27451,7 +27451,7 @@ const MainView = ()=>{
                 children: content
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 104,
+                lineNumber: 106,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
@@ -27466,17 +27466,17 @@ const MainView = ()=>{
                         children: "Logout"
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 113,
+                        lineNumber: 115,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 112,
+                    lineNumber: 114,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 111,
+                lineNumber: 113,
                 columnNumber: 7
             }, undefined)
         ]
@@ -30978,30 +30978,9 @@ var _reactBootstrap = require("react-bootstrap");
 var _s = $RefreshSig$();
 const MovieCard = ({ movie, onMovieClick })=>{
     _s();
-    const [isTruncated, setIsTruncated] = (0, _react.useState)(false);
-    const [truncatedDescription, setTruncatedDescription] = (0, _react.useState)(movie.description);
-    (0, _react.useEffect)(()=>{
-        const cardTextEl = document.querySelector(`#movie-card-${movie.id} .card-text`);
-        if (!cardTextEl) return; // Avoid errors if element not yet rendered
-        const actualHeight = cardTextEl.scrollHeight;
-        const maxHeight = cardTextEl.clientHeight;
-        if (actualHeight > maxHeight) {
-            setIsTruncated(true);
-            const dots = "...";
-            let truncatedText = movie.description;
-            while(cardTextEl.scrollHeight > cardTextEl.clientHeight)truncatedText = truncatedText.substring(0, truncatedText.length - 1);
-            setTruncatedDescription(truncatedText + dots);
-        } else {
-            setIsTruncated(false);
-            setTruncatedDescription(movie.description);
-        }
-    }, [
-        movie.description
-    ]);
+    const [isTruncated, setIsTruncated] = (0, _react.useState)(true);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "h-100 vh-5 w-100 hover-overlay",
-        variant: "link",
-        onClick: ()=>onMovieClick(movie),
         style: {
             display: "flex",
             flexDirection: "column",
@@ -31010,10 +30989,15 @@ const MovieCard = ({ movie, onMovieClick })=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
                 variant: "top",
+                style: {
+                    cursor: "pointer"
+                },
+                onClick: ()=>onMovieClick(movie),
+                fluid: true,
                 src: movie.image
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 39,
+                lineNumber: 13,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -31022,29 +31006,32 @@ const MovieCard = ({ movie, onMovieClick })=>{
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 41,
+                        lineNumber: 20,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
-                        className: "card-text",
+                        className: `card-text ${isTruncated ? "truncate-multiline" : ""}`,
                         style: {
-                            maxHeight: "50px",
-                            overflow: "hidden"
+                            padding: "0em",
+                            margin: "0em"
                         },
-                        children: [
-                            isTruncated ? truncatedDescription : movie.description,
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                onClick: ()=>setIsTruncated(!isTruncated),
-                                children: isTruncated ? "Read More" : "Read Less"
-                            }, void 0, false, {
-                                fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 46,
-                                columnNumber: 11
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
+                        children: movie.description
+                    }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 42,
+                        lineNumber: 21,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                        variant: "link",
+                        size: "sm",
+                        style: {
+                            padding: "0px 0em 1em"
+                        },
+                        onClick: ()=>setIsTruncated(!isTruncated),
+                        children: isTruncated ? "Read More" : "Read Less"
+                    }, void 0, false, {
+                        fileName: "src/components/movie-card/movie-card.jsx",
+                        lineNumber: 24,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
@@ -31057,23 +31044,23 @@ const MovieCard = ({ movie, onMovieClick })=>{
                         children: movie.genre.name
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 50,
+                        lineNumber: 27,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 40,
+                lineNumber: 19,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 33,
+        lineNumber: 9,
         columnNumber: 5
     }, undefined);
 };
-_s(MovieCard, "BJTNh3JtyCMKo5gEGIqsMeU6BwI=");
+_s(MovieCard, "uF82jnWCCSUpvNXCPQ4j8f4VtcY=");
 _c = MovieCard;
 MovieCard.propTypes = {
     movie: (0, _propTypes.PropTypes).shape({

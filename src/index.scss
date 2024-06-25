@@ -1,8 +1,23 @@
 $color: steelblue;
-.watchlist{color: $color}
+$numberOfLines: 3;
+
 html, body {
   background-color: #3b3b3b;
   color: lightgray;
   font-family: Arial, sans-serif;
 }
+.watchlist{color: $color}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $numberOfLines;
+  overflow: hidden;
+}
+
 @import '~bootstrap/scss/bootstrap.scss';

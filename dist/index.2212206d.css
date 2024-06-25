@@ -1,11 +1,24 @@
-.watchlist {
-  color: #4682b4;
-}
-
 html, body {
   color: #d3d3d3;
   background-color: #3b3b3b;
   font-family: Arial, sans-serif;
+}
+
+.watchlist {
+  color: #4682b4;
+}
+
+.truncate {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.truncate-multiline {
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
 }
 
 :root, [data-bs-theme="light"] {

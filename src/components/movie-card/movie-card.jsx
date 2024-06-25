@@ -3,50 +3,27 @@ import { PropTypes } from "prop-types";
 import { Button, Card } from "react-bootstrap";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
-  const [isTruncated, setIsTruncated] = useState(false);
-  const [truncatedDescription, setTruncatedDescription] = useState(movie.description);
-
-  useEffect(() => {
-    const cardTextEl = document.querySelector(`#movie-card-${movie.id} .card-text`);
-    if (!cardTextEl) return; // Avoid errors if element not yet rendered
-
-    const actualHeight = cardTextEl.scrollHeight;
-    const maxHeight = cardTextEl.clientHeight;
-
-    if (actualHeight > maxHeight) {
-      setIsTruncated(true);
-      const dots = '...';
-      let truncatedText = movie.description;
-
-      while (cardTextEl.scrollHeight > cardTextEl.clientHeight) {
-        truncatedText = truncatedText.substring(0, truncatedText.length - 1);
-      }
-
-      setTruncatedDescription(truncatedText + dots);
-    } else {
-      setIsTruncated(false);
-      setTruncatedDescription(movie.description);
-    }
-  }, [movie.description]);
+  const [isTruncated, setIsTruncated] = useState(true);
 
   return (
     <Card
       className="h-100 vh-5 w-100 hover-overlay"
-      variant="link"
-      onClick={() => onMovieClick(movie)}
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}
-    >
-      <Card.Img variant="top" src={ movie.image } />
+      >
+      <Card.Img
+        variant="top"
+        style={{ cursor: "pointer" }}
+        onClick={() => onMovieClick(movie)}
+        fluid
+        src={ movie.image } />
       <Card.Body >
         <Card.Title>{ movie.title }</Card.Title>
-        <Card.Text
-            className="card-text"
-            style={{ maxHeight: '50px', overflow: 'hidden' }}>
-          { isTruncated ? truncatedDescription : movie.description }
-          <button onClick={()=> setIsTruncated(!isTruncated)}>
-            { isTruncated? "Read More" : "Read Less" }
-          </button>
+        <Card.Text className={`card-text ${isTruncated? "truncate-multiline":""}`} style={{ padding: "0em", margin: "0em" }}>
+          { movie.description }
         </Card.Text>
+        <Button variant="link" size="sm" style={{ padding: "0px 0em 1em" }} onClick={()=> setIsTruncated(!isTruncated)}>
+          { isTruncated? "Read More" : "Read Less" }
+        </Button>
         <Card.Text style={{ textAlign: 'right', position: 'absolute', bottom: 5, right: 20 }}>
           { movie.genre.name }
         </Card.Text>
