@@ -18,13 +18,19 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         src={ movie.image } />
       <Card.Body >
         <Card.Title>{ movie.title }</Card.Title>
-        <Card.Text className={`card-text ${isTruncated? "truncate-multiline":""}`} style={{ padding: "0em", margin: "0em" }}>
+        <Card.Text
+          className={`card-text ${isTruncated? "truncate-multiline":""}`}
+          style={{ padding: "0em", margin: "0em" }}>
           { movie.description }
         </Card.Text>
-        <Button variant="link" size="sm" style={{ padding: "0px 0em 1em" }} onClick={()=> setIsTruncated(!isTruncated)}>
+        <Button
+          variant="link" size="sm"
+          style={{ padding: "0px 0em 1em" }}
+          onClick={()=> setIsTruncated(!isTruncated)}>
           { isTruncated? "Read More" : "Read Less" }
         </Button>
-        <Card.Text style={{ textAlign: 'right', position: 'absolute', bottom: 5, right: 20 }}>
+        <Card.Text
+          style={{ textAlign: 'right', position: 'absolute', bottom: 5, right: 20 }}>
           { movie.genre.name }
         </Card.Text>
       </Card.Body>
