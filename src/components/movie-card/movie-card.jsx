@@ -43,6 +43,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
             className="card-text"
             style={{ maxHeight: '50px', overflow: 'hidden' }}>
           { isTruncated ? truncatedDescription : movie.description }
+          <button onClick={()=> setIsTruncated(!isTruncated)}>
+            { isTruncated? "Read More" : "Read Less" }
+          </button>
         </Card.Text>
         <Card.Text style={{ textAlign: 'right', position: 'absolute', bottom: 5, right: 20 }}>
           { movie.genre.name }

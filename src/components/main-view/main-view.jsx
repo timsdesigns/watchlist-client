@@ -83,24 +83,32 @@ export const MainView =()=>{
   );
 
   let content = isLoading ? <Col>Loading...</Col> :
-    selMovie ? <Col>
+    selMovie ? <Col md={8}>
       <MovieView
         movie={ selMovie }
         onBackClick={ ()=> setSelMovie(null) }/>
     </Col> :
     movies.length <1 ? <Col>No movies in list.</Col> :
     <>{ movies.map( m =>
-      <Col className="mb5" md="3">
-        <MovieCard
-          key={ m.id }
-          movie={ m }
-          onMovieClick={ newMovieSel => setSelMovie(newMovieSel) }
-          />
-      </Col>
-    )}</>;
+        <Col className="mb5" md="3">
+          <MovieCard
+            key={ m.id }
+            movie={ m }
+            onMovieClick={ newMovieSel => setSelMovie(newMovieSel) }
+            />
+        </Col>
+      ) }
+    </>;
 
-    return <Row xs={1} md={2} lg={4} className="g-4">
-        { content }
+    return <>
+      <Row
+            xs={1}
+            md={2}
+            lg={4}
+            className="g-4 justify-content-md-center">
+        { content }        
+      </Row>
+      <Row>
         <Col>
           <Button
             variant="primary"
@@ -112,4 +120,5 @@ export const MainView =()=>{
               >Logout</Button>
         </Col>
       </Row>
+      </>;
 };
