@@ -1,8 +1,10 @@
 $color: steelblue;
 $numberOfLines: 3;
-
+:root {
+  --background-color: #3b3b3b; /* Default dark gray */
+}
 html, body {
-  background-color: #3b3b3b;
+  background-color: #3b3b3b!important;
   color: lightgray;
   font-family: Arial, sans-serif;
 }
